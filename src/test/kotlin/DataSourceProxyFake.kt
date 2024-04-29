@@ -1,5 +1,4 @@
 import io.mockk.MockKAdditionalAnswerScope
-import io.mockk.every
 import io.mockk.mockk
 import org.example.*
 
@@ -8,7 +7,7 @@ class DataSourceProxyFake(
     override val blacklistPep: DataSourceBlacklistPepService = mockk<DataSourceBlacklistPepService>(),
     override val all: DataSourceAllService = mockk<DataSourceAllService>(),
 ) : DataSourceProxyInterface {
-    fun withFindDataSourceMocked(mockMethod: (DataSourceService) -> MockKAdditionalAnswerScope<DataSource, DataSource>) {
+    fun <T, U> mockAllServicesWith(mockMethod: (DataSourceService) -> MockKAdditionalAnswerScope<T, U>) {
         mockMethod(core)
         mockMethod(blacklistPep)
         mockMethod(all)
