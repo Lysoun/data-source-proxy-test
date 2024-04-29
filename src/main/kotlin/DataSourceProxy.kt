@@ -1,11 +1,11 @@
 package org.example
 
 class DataSourceProxy(
-    val core: DataSourceCoreService,
-    val blacklistPep: DataSourceBlacklistPepService,
-    val all: DataSourceAllService
-) {
-    fun of(id: String): DataSourceService {
+    override val core: DataSourceCoreService,
+    override val blacklistPep: DataSourceBlacklistPepService,
+    override val all: DataSourceAllService
+): DataSourceProxyInterface {
+    override fun of(id: String): DataSourceService {
         return if (id.contains("e")) {
             core
         } else {
